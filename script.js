@@ -44,15 +44,15 @@ const defaultProducts = [
     description: "Klein, süß und besonders aromatisch – ein Klassiker für jeden Anlass."
   },
   {
-    id: "mussels",
-    name: "Miesmuscheln",
+    id: "fish-spread",
+    name: "Fischaufstrich",
     category: "Shellfish",
     price: 14.8,
     stock: 18,
-    unit: "pro kg",
+    unit: "pro Glas",
     image:
-      "https://images.unsplash.com/photo-1604909052743-94e838986d24?auto=format&fit=crop&w=900&q=80",
-    description: "Frisch aus der Nordsee, ideal für Pasta, Suppen und warme Vorspeisen."
+      "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=80",
+    description: "Cremiger Aufstrich aus fein geräuchertem Fisch, ideal für Brot, Brötchen und Genussplatten."
   },
   {
     id: "sea-bass",
@@ -358,7 +358,6 @@ function setupEventHandlers() {
 
     const formData = new FormData(enquiryForm);
     const name = formData.get("name")?.toString().trim() || "Kunde";
-    const company = formData.get("company")?.toString().trim();
     const email = formData.get("email")?.toString().trim();
     const message = formData.get("message")?.toString().trim();
 
@@ -366,7 +365,7 @@ function setupEventHandlers() {
       .map((item) => `${item.name} × ${item.qty} = ${currency(item.price * item.qty)}`)
       .join("\n");
 
-    const body = `Hallo Feichtinger Fischhandel,\n\nBitte nehmen Sie meine Anfrage entgegen.\n\nName: ${name}\nUnternehmen: ${company || "-"}\nE-Mail: ${email || "-"}\n\nBestellung:\n${orderLines}\n\nGesamt: ${currency(cart.reduce((sum, item) => sum + item.price * item.qty, 0))}\n\nHinweise: ${message || "Keine besonderen Hinweise"}\n`;
+    const body = `Hallo Feichtinger Fischhandel,\n\nBitte nehmen Sie meine Anfrage entgegen.\n\nName: ${name}\nE-Mail: ${email || "-"}\n\nBestellung:\n${orderLines}\n\nGesamt: ${currency(cart.reduce((sum, item) => sum + item.price * item.qty, 0))}\n\nHinweise: ${message || "Keine besonderen Hinweise"}\n`;
 
     const subject = encodeURIComponent(`Bestellanfrage von ${name}`);
     window.location.href = `mailto:info@feichtinger-fischhandel.de?subject=${subject}&body=${encodeURIComponent(body)}`;
